@@ -20,7 +20,7 @@ except:
     raise
 
 global buttonSize
-buttonSize = (70, 25)  # Define sizes for the buttons on top rows
+buttonSize = (90, 40)  # Define sizes for the buttons on top rows
 
 from printrun import gviz
 from printrun.xybuttons import XYButtons
@@ -40,6 +40,111 @@ def make_sized_button(*args):
 
 def make_autosize_button(*args):
     return make_button(*args, size = (-1, buttonSize[1]), style = wx.BU_EXACTFIT)
+
+class KeyboardSizer(wx.GridBagSizer):
+    def __init__(self, root):
+	super(KeyboardSizer, self).__init__()
+	self.parent = root
+	self.Abtn = self.make_button("A")
+	self.Add(self.Abtn, pos=(0,0))
+	self.Bbtn = self.make_button("B")
+	self.Add(self.Bbtn, pos=(0,1))
+	self.Cbtn = self.make_button("C")
+	self.Add(self.Cbtn, pos=(0,2))
+	self.Dbtn = self.make_button("D")
+	self.Add(self.Dbtn, pos=(0,3))
+	self.Ebtn = self.make_button("E")
+	self.Add(self.Ebtn, pos=(0,4))
+	self.Fbtn = self.make_button("F")
+	self.Add(self.Fbtn, pos=(0,5))
+	self.Gbtn = self.make_button("G")
+	self.Add(self.Gbtn, pos=(0,6))
+	self.Gbtn.SetBackgroundColour('#AAFFAA');
+	self.Hbtn = self.make_button("H")
+	self.Add(self.Hbtn, pos=(0,7))
+	self.Ibtn = self.make_button("I")
+	self.Add(self.Ibtn, pos=(0,8))
+	self.Jbtn = self.make_button("J")
+	self.Add(self.Jbtn, pos=(0,9))
+	self.Kbtn = self.make_button("K")
+	self.Add(self.Kbtn, pos=(1,0))
+	self.Lbtn = self.make_button("L")
+	self.Add(self.Lbtn, pos=(1,1))
+	self.Mbtn = self.make_button("M")
+	self.Add(self.Mbtn, pos=(1,2))
+	self.Mbtn.SetBackgroundColour('#AAFFAA');
+	self.Nbtn = self.make_button("N")
+	self.Add(self.Nbtn, pos=(1,3))
+	self.Obtn = self.make_button("O")
+	self.Add(self.Obtn, pos=(1,4))
+	self.Pbtn = self.make_button("P")
+	self.Add(self.Pbtn, pos=(1,5))
+	self.Qbtn = self.make_button("Q")
+	self.Add(self.Qbtn, pos=(1,6))
+	self.Rbtn = self.make_button("R")
+	self.Add(self.Rbtn, pos=(1,7))
+	self.Sbtn = self.make_button("S")
+	self.Add(self.Sbtn, pos=(1,8))
+	self.Tbtn = self.make_button("T")
+	self.Add(self.Tbtn, pos=(1,9))
+	self.Ubtn = self.make_button("U")
+	self.Add(self.Ubtn, pos=(2,0))
+	self.Vbtn = self.make_button("V")
+	self.Add(self.Vbtn, pos=(2,1))
+	self.Wbtn = self.make_button("W")
+	self.Add(self.Wbtn, pos=(2,2))
+	self.Xbtn = self.make_button("X")
+	self.Add(self.Xbtn, pos=(2,3))
+	self.Ybtn = self.make_button("Y")
+	self.Add(self.Ybtn, pos=(2,4))
+	self.Zbtn = self.make_button("Z")
+	self.Add(self.Zbtn, pos=(2,5))
+	self.Backbtn = self.make_button("<-")
+	self.Add(self.Backbtn, pos=(2,6))
+	self.Clrbtn = self.make_button("CLR")
+	self.Clrbtn.SetBackgroundColour('#FFAAAA')
+	self.Add(self.Clrbtn, pos=(2,7))
+	self.Spacebtn = self.make_button(" ")
+	self.Add(self.Spacebtn, pos=(2,8))
+	self.Dotbtn = self.make_button(".")
+	self.Add(self.Dotbtn, pos=(2,9))
+	self.N0btn = self.make_button("0")
+	self.Add(self.N0btn, pos=(3,0))
+	self.N1btn = self.make_button("1")
+	self.Add(self.N1btn, pos=(3,1))
+	self.N2btn = self.make_button("2")
+	self.Add(self.N2btn, pos=(3,2))
+	self.N3btn = self.make_button("3")
+	self.Add(self.N3btn, pos=(3,3))
+	self.N4btn = self.make_button("4")
+	self.Add(self.N4btn, pos=(3,4))
+	self.N5btn = self.make_button("5")
+	self.Add(self.N5btn, pos=(3,5))
+	self.N6btn = self.make_button("6")
+	self.Add(self.N6btn, pos=(3,6))
+	self.N7btn = self.make_button("7")
+	self.Add(self.N7btn, pos=(3,7))
+	self.N8btn = self.make_button("8")
+	self.Add(self.N8btn, pos=(3,8))
+	self.N9btn = self.make_button("9")
+	self.Add(self.N9btn, pos=(3,9))
+	
+    def make_button(self, label):
+	button = wx.Button(self.parent.panel, -1, label, style=0, size = (36,36))
+	button.Bind(wx.EVT_BUTTON, self.btn_press)
+	return button
+	
+    def btn_press(self, event):
+	button = event.GetEventObject()
+        lbl = button.GetLabel()
+        if lbl == "<-":
+	    str = self.parent.commandbox.GetValue()
+	    self.parent.commandbox.SetValue(str[:-1]) # remove last character
+	    return
+	if lbl == "CLR":
+	    self.parent.commandbox.SetValue("")
+	    return
+        self.parent.commandbox.AppendText(lbl);
 
 class XYZControlsSizer(wx.GridBagSizer):
 
@@ -201,6 +306,11 @@ class LogPane(wx.BoxSizer):
         root.logbox = wx.TextCtrl(root.panel, style = wx.TE_MULTILINE, size = (350,-1))
         root.logbox.SetEditable(0)
         self.Add(root.logbox, 1, wx.EXPAND)
+
+        # add keypad
+        root.kb = KeyboardSizer(root)
+        self.Add(root.kb,0)
+        
         lbrs = wx.BoxSizer(wx.HORIZONTAL)
         root.commandbox = wx.TextCtrl(root.panel, style = wx.TE_PROCESS_ENTER)
         root.commandbox.SetToolTip(wx.ToolTip("Send commands to printer\n(Type 'help' for simple\nhelp function)"))
@@ -243,9 +353,9 @@ class MainToolbar(wx.BoxSizer):
 
         root.resetbtn = make_autosize_button(root.panel, _("Reset"), root.reset, _("Reset the printer"), self)
         root.loadbtn = make_autosize_button(root.panel, _("Load file"), root.loadfile, _("Load a 3D model file"), self)
-        root.platebtn = make_autosize_button(root.panel, _("Compose"), root.plate, _("Simple Plater System"), self)
-        root.sdbtn = make_autosize_button(root.panel, _("SD"), root.sdmenu, _("SD Card Printing"), self)
-        root.printerControls.append(root.sdbtn)
+        # root.platebtn = make_autosize_button(root.panel, _("Compose"), root.plate, _("Simple Plater System"), self)
+        # root.sdbtn = make_autosize_button(root.panel, _("SD"), root.sdmenu, _("SD Card Printing"), self)
+        # root.printerControls.append(root.sdbtn)
         root.printbtn = make_sized_button(root.panel, _("Print"), root.printfile, _("Start Printing Loaded File"), self)
         root.printbtn.Disable()
         root.pausebtn = make_sized_button(root.panel, _("Pause"), root.pause, _("Pause Current Print"), self)
@@ -258,6 +368,9 @@ class MainWindow(wx.Frame):
         # this list will contain all controls that should be only enabled
         # when we're connected to a printer
         self.printerControls = []
+
+    def fullscreen(self, event):
+	self.ShowFullScreen(not self.IsFullScreen())
 
     def createGui(self):
         self.mainsizer = wx.BoxSizer(wx.VERTICAL)

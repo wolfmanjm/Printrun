@@ -32,6 +32,8 @@ from serial import SerialException
 
 StringIO = cStringIO
 
+print (os.name)
+
 winsize = (800, 500)
 layerindex = 0
 if os.name == "nt":
@@ -648,7 +650,7 @@ class PronterWindow(MainWindow, pronsole.pronsole):
         for i in xrange(len(self.custombuttons)):
             btndef = self.custombuttons[i]
             try:
-                b = wx.Button(self.panel, -1, btndef.label, style = wx.BU_EXACTFIT)
+                b = wx.Button(self.panel, -1, btndef.label, style = wx.BU_EXACTFIT, size = (90, 40))
                 b.SetToolTip(wx.ToolTip(_("Execute command: ")+btndef.command))
                 if btndef.background:
                     b.SetBackgroundColour(btndef.background)

@@ -1,3 +1,12 @@
+This Branch is for the Pengpod 1000 10" Linux tablet.
+It is mostly the same as regular Proterface with the following changes/additions...
+
+* added a keypad from https://github.com/fsantini/Printrun-pengpod700.git
+* TODO add drop down menu or touch area for most commonly used M and G codes
+* TODO add full screen mode
+* TODO turn off screen saver
+
+
 Printrun consists of printcore, pronsole and pronterface, and a small collection of helpful scripts.
 
   * printcore.py is a library that makes writing reprap hosts easy
