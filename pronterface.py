@@ -680,7 +680,7 @@ class PronterWindow(MainWindow, pronsole.pronsole):
             #if i<4:
             #    ubs.Add(b)
             #else:
-            cs.Add(b, pos = ((i)/4, (i)%4))
+            cs.Add(b, pos = ((i)/3, (i)%3))
         self.mainsizer.Layout()
 
     def help_button(self):
@@ -757,7 +757,7 @@ class PronterWindow(MainWindow, pronsole.pronsole):
                         colour = wx.Colour(colour).GetAsString(wx.C2S_NAME|wx.C2S_HTML_SYNTAX)
                 bedit.color.SetValue(colour)
         else:
-            n = len(self.custombuttons)
+            n = len(self.t)
             while n>0 and self.custombuttons[n-1] is None:
                 n -= 1
         if bedit.ShowModal() == wx.ID_OK:
