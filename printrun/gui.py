@@ -131,7 +131,7 @@ class KeyboardSizer(wx.GridBagSizer):
 	self.Add(self.N9btn, pos=(3,9))
 	
     def make_button(self, label):
-	button = wx.Button(self.parent.panel, -1, label, style=0, size = (36,36))
+	button = wx.Button(self.parent.panel, -1, label, style=0, size = (50,50))
 	button.Bind(wx.EVT_BUTTON, self.btn_press)
 	return button
 	
@@ -278,7 +278,7 @@ class VizPane(wx.BoxSizer):
 
     def __init__(self, root):
         super(VizPane, self).__init__(wx.VERTICAL)
-        root.gviz = gviz.gviz(root.panel, (300, 300),
+        root.gviz = gviz.gviz(root.panel, (250, 250),
             build_dimensions = root.build_dimensions_list,
             grid = (root.settings.preview_grid_step1, root.settings.preview_grid_step2),
             extrusion_width = root.settings.preview_extrusion_width)
