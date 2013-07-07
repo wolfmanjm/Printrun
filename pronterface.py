@@ -680,7 +680,7 @@ class PronterWindow(MainWindow, pronsole.pronsole):
             #if i<4:
             #    ubs.Add(b)
             #else:
-            cs.Add(b, pos = ((i)/3, (i)%3))
+            cs.Add(b, pos = ((i)/2, (i)%2))
         self.mainsizer.Layout()
 
     def help_button(self):
