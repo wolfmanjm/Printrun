@@ -23,12 +23,13 @@ def sign(n):
     else: return 0
 
 class ZButtons(BufferedCanvas):
-    button_ydistances = [7, 30, 55, 83] # ,112
-    center = (30, 118)
+    scale= 1.693
+    button_ydistances = [7*scale, 30*scale, 55*scale, 83*scale] # ,112
+    center = (30*scale, 118*scale)
     label_overlay_positions = {
-        0: (1, 18, 11),
-        1: (1, 41, 13),
-        2: (1, 67, 15),
+        0: (1, 18*scale, 11*scale),
+        1: (1, 41*scale, 13*scale),
+        2: (1, 67*scale, 15*scale),
         3: None
     }
 
@@ -48,7 +49,7 @@ class ZButtons(BufferedCanvas):
 
         BufferedCanvas.__init__(self, parent, ID)
 
-        self.SetSize(wx.Size(59, 244))
+        self.SetSize(wx.Size(100, 413))
 
         # Set up mouse and keyboard event capture
         self.Bind(wx.EVT_LEFT_DOWN, self.OnLeftDown)
@@ -85,7 +86,7 @@ class ZButtons(BufferedCanvas):
 
         fudge = 11
         x = 0 + fudge
-        w = 59 - fudge*2
+        w = 59*self.scale - fudge*2
         if rng >= 0:
             k = 1 if dir > 0 else 0
             y = ZButtons.center[1] - (dir * ZButtons.button_ydistances[rng+k])
