@@ -836,7 +836,7 @@ class PronterWindow(MainWindow, pronsole.pronsole):
         custombuttons = self.custombuttons[:] + [None]
         for i, btndef in enumerate(custombuttons):
             try:
-                b = wx.Button(self.centerpanel, -1, btndef.label, style = wx.BU_EXACTFIT)
+                b = wx.Button(self.centerpanel, -1, btndef.label, style = wx.BU_EXACTFIT, size = (90, 40))
                 b.SetToolTip(wx.ToolTip(_("Execute command: ")+btndef.command))
                 if btndef.background:
                     b.SetBackgroundColour(btndef.background)
