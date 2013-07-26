@@ -469,6 +469,14 @@ def MainToolbar(root, parentpanel = None, use_wrapsizer = False):
         glob.Add(root.locker, 0) 
     ToolbarSizer = wx.WrapSizer if use_wrapsizer and wx.VERSION > (2, 9) else wx.BoxSizer
     self = ToolbarSizer(wx.HORIZONTAL)
+
+    # add the fullscreen button
+    imageFS = wx.Image(imagefile('fullscreen.png'), wx.BITMAP_TYPE_ANY).ConvertToBitmap()
+    root.fullscreenbtn = wx.BitmapButton(root.panel, -1, bitmap=imageFS, size = (buttonSize[1], buttonSize[1]), style = wx.BU_EXACTFIT) #size is square, it's not a typo
+    root.fullscreenbtn.Bind(wx.EVT_BUTTON, root.fullscreen)
+    root.fullscreenbtn.SetToolTip(wx.ToolTip("Toggle full screen"))
+    self.Add(root.fullscreenbtn)
+ 
     root.rescanbtn = make_sized_button(parentpanel, _("Port"), root.rescanports, _("Communication Settings\nClick to rescan ports"))
     self.Add(root.rescanbtn, 0, wx.TOP|wx.LEFT, 0)
 
@@ -647,3 +655,6 @@ class MainWindow(wx.Frame):
             i.Disable()
 
         self.cbuttons_reload()
+    
+    def fullscreen(self, event):
+       self.ShowFullScreen(not self.IsFullScreen())
