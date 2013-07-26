@@ -33,7 +33,7 @@ from serial import SerialException
 
 StringIO = cStringIO
 
-winsize = (800, 500)
+winsize = (900, 900)
 layerindex = 0
 if os.name == "nt":
     winsize = (800, 530)
@@ -861,7 +861,7 @@ class PronterWindow(MainWindow, pronsole.pronsole):
                 b.Bind(wx.EVT_BUTTON, self.procbutton)
                 b.Bind(wx.EVT_MOUSE_EVENTS, self.editbutton)
             self.custombuttonbuttons.append(b)
-            self.centersizer.Add(b, pos = (i // 4, i % 4))
+            self.centersizer.Add(b, pos = (i // 2, i % 2))
         self.panel.GetSizer().Layout()
 
     def help_button(self):

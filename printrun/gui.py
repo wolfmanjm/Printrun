@@ -615,7 +615,7 @@ class MainWindow(wx.Frame):
         self.centerpanel.SetSizer(self.centersizer)
         viz_pane.Add(self.centerpanel, 0, flag = wx.ALIGN_CENTER)
         vizpanel.SetSizer(viz_pane)
-        self.lowersizer.Add(vizpanel, 1, wx.EXPAND | wx.ALIGN_CENTER)
+        self.lowersizer.Add(vizpanel, 0, wx.EXPAND | wx.ALIGN_CENTER)
         logpanel = self.newPanel(lowerpanel)
         log_pane = LogPane(self, logpanel)
         logpanel.SetSizer(log_pane)
