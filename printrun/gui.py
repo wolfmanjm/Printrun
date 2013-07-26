@@ -433,14 +433,14 @@ class LogPane(wx.BoxSizer):
     def __init__(self, root, parentpanel = None):
         super(LogPane, self).__init__(wx.VERTICAL)
         if not parentpanel: parentpanel = root.panel
-        root.logbox = wx.TextCtrl(parentpanel, style = wx.TE_MULTILINE, size = (350,-1))
-        root.logbox.SetMinSize((100,-1))
+        root.logbox = wx.TextCtrl(parentpanel, style = wx.TE_MULTILINE, size = (350,400))
+        root.logbox.SetMinSize((100,350))
         root.logbox.SetEditable(0)
-        self.Add(root.logbox, 1, wx.EXPAND)
+        self.Add(root.logbox, 0, wx.EXPAND)
         
         # add keypad
         root.kb = KeyboardSizer(root, parentpanel)
-        self.Add(root.kb,0)
+        self.Add(root.kb,0,wx.EXPAND)
 
         lbrs = wx.BoxSizer(wx.HORIZONTAL)
         root.commandbox = wx.TextCtrl(parentpanel, style = wx.TE_PROCESS_ENTER)
