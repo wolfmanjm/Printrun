@@ -472,7 +472,7 @@ def MainToolbar(root, parentpanel = None, use_wrapsizer = False):
 
     # add the fullscreen button
     imageFS = wx.Image(imagefile('fullscreen.png'), wx.BITMAP_TYPE_ANY).ConvertToBitmap()
-    root.fullscreenbtn = wx.BitmapButton(root.panel, -1, bitmap=imageFS, size = (buttonSize[1], buttonSize[1]), style = wx.BU_EXACTFIT) #size is square, it's not a typo
+    root.fullscreenbtn = wx.BitmapButton(parentpanel, -1, bitmap=imageFS, size = (buttonSize[1], buttonSize[1]), style = wx.BU_EXACTFIT) #size is square, it's not a typo
     root.fullscreenbtn.Bind(wx.EVT_BUTTON, root.fullscreen)
     root.fullscreenbtn.SetToolTip(wx.ToolTip("Toggle full screen"))
     self.Add(root.fullscreenbtn)
