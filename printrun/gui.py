@@ -645,9 +645,9 @@ class MainWindow(wx.Frame):
         # This prevents resizing below a reasonnable value
         # We sum the lowersizer (left pane / viz / log) min size
         # the toolbar height and the statusbar/menubar sizes
-        minsize = self.lowersizer.GetMinSize() # lower pane
-        minsize[1] += self.uppersizer.GetMinSize()[1] # toolbar height
-        self.SetMinSize(self.ClientToWindowSize(minsize)) # client to window
+        # minsize = self.lowersizer.GetMinSize() # lower pane
+        # minsize[1] += self.uppersizer.GetMinSize()[1] # toolbar height
+        # self.SetMinSize(self.ClientToWindowSize(minsize)) # client to window
 
         # disable all printer controls until we connect to a printer
         self.pausebtn.Disable()
@@ -658,5 +658,6 @@ class MainWindow(wx.Frame):
         self.cbuttons_reload()
 
     def fullscreen(self, event):
+        # show statis bar does not work for some reason in wx 2.8
         flags= wx.FULLSCREEN_NOMENUBAR|wx.FULLSCREEN_NOTOOLBAR|wx.FULLSCREEN_NOBORDER|wx.FULLSCREEN_NOCAPTION
         self.ShowFullScreen(not self.IsFullScreen(), flags)
