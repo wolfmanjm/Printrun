@@ -30,6 +30,7 @@ from printrun.zbuttons import ZButtons
 from printrun.graph import Graph
 from printrun.pronterface_widgets import TempGauge
 from printrun_utils import imagefile
+from operator import or_
 
 def make_button(parent, label, callback, tooltip, container = None, size = wx.DefaultSize, style = 0):
     button = wx.Button(parent, -1, label, style = style, size = size)
@@ -241,7 +242,7 @@ def add_extra_controls(self, root, parentpanel, extra_buttons = None):
         root.htemp.SetValue(root.htemp.Value + ' (user)')
 
     root.tempdisp = wx.StaticText(parentpanel,-1, "")
-   
+
     if not extra_buttons:
         ebuttonspanel = root.newPanel(parentpanel)
         ebuttonssizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -329,7 +330,7 @@ class LeftPane(wx.GridBagSizer):
         self.Add(llts, pos = (0, 0), span = (1, 6))
         self.xyzsizer = XYZControlsSizer(root, parentpanel)
         self.Add(self.xyzsizer, pos = (1, 0), span = (1, 6), flag = wx.ALIGN_CENTER)
-       
+
         self.extra_buttons = {}
         ebuttons = []
         for i in root.cpbuttons:
@@ -437,7 +438,7 @@ class LogPane(wx.BoxSizer):
         root.logbox.SetMinSize((100,300))
         root.logbox.SetEditable(0)
         self.Add(root.logbox, 0, wx.EXPAND)
-        
+
         # add keypad
         root.kb = KeyboardSizer(root, parentpanel)
         self.Add(root.kb,0,wx.EXPAND)
@@ -466,7 +467,7 @@ def MainToolbar(root, parentpanel = None, use_wrapsizer = False):
         origpanel = parentpanel
         parentpanel = root.newPanel(parentpanel)
         glob.Add(parentpanel, 1, flag = wx.EXPAND)
-        glob.Add(root.locker, 0) 
+        glob.Add(root.locker, 0)
     ToolbarSizer = wx.WrapSizer if use_wrapsizer and wx.VERSION > (2, 9) else wx.BoxSizer
     self = ToolbarSizer(wx.HORIZONTAL)
 
@@ -476,7 +477,7 @@ def MainToolbar(root, parentpanel = None, use_wrapsizer = False):
     root.fullscreenbtn.Bind(wx.EVT_BUTTON, root.fullscreen)
     root.fullscreenbtn.SetToolTip(wx.ToolTip("Toggle full screen"))
     self.Add(root.fullscreenbtn)
- 
+
     root.rescanbtn = make_sized_button(parentpanel, _("Port"), root.rescanports, _("Communication Settings\nClick to rescan ports"))
     self.Add(root.rescanbtn, 0, wx.TOP|wx.LEFT, 0)
 
@@ -516,7 +517,7 @@ def MainToolbar(root, parentpanel = None, use_wrapsizer = False):
         return self
 
 class MainWindow(wx.Frame):
-    
+
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         # this list will contain all controls that should be only enabled
@@ -655,6 +656,7 @@ class MainWindow(wx.Frame):
             i.Disable()
 
         self.cbuttons_reload()
-    
+
     def fullscreen(self, event):
-       self.ShowFullScreen(not self.IsFullScreen())
+        flags= wx.FULLSCREEN_NOMENUBAR|wx.FULLSCREEN_NOTOOLBAR|wx.FULLSCREEN_NOBORDER|wx.FULLSCREEN_NOCAPTION
+        self.ShowFullScreen(not self.IsFullScreen(), flags)
