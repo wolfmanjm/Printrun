@@ -143,6 +143,8 @@ class KeyboardSizer(wx.GridBagSizer):
         self.Add(self.N8btn, pos=(3,8))
         self.N9btn = self.make_button("9")
         self.Add(self.N9btn, pos=(3,9))
+        self.Minusbtn = self.make_button("-")
+        self.Add(self.Minusbtn, pos=(3,10))
 
     def make_button(self, label):
         button = wx.Button(self.parentpanel, -1, label, style=0, size = (50,50))

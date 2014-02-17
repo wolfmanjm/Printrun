@@ -218,7 +218,7 @@ class StaticTextSetting(wxSetting):
         return self.widget
 
 class Settings(object):
-    #def _temperature_alias(self): return {"pla":210, "abs":230, "off":0}
+    #def _temperature_alias(self): return {"pla":210, "abs":200, "off":0}
     #def _temperature_validate(self, v):
     #    if v < 0: raise ValueError("You cannot set negative temperatures. To turn the hotend off entirely, set its temperature to 0.")
     #def _bedtemperature_alias(self): return {"pla":60, "abs":110, "off":0}
@@ -230,7 +230,7 @@ class Settings(object):
         self._add(ComboSetting("baudrate", 115200, self._baudrate_list(), _("Baud rate"), _("Communications Speed")))
         self._add(SpinSetting("bedtemp_abs", 110, 0, 400, _("Bed temperature for ABS"), _("Heated Build Platform temp for ABS (deg C)"), "Printer"))
         self._add(SpinSetting("bedtemp_pla", 60, 0, 400, _("Bed temperature for PLA"), _("Heated Build Platform temp for PLA (deg C)"), "Printer"))
-        self._add(SpinSetting("temperature_abs", 230, 0, 400, _("Extruder temperature for ABS"), _("Extruder temp for ABS (deg C)"), "Printer"))
+        self._add(SpinSetting("temperature_abs", 200, 0, 400, _("Extruder temperature for ABS"), _("Extruder temp for ABS (deg C)"), "Printer"))
         self._add(SpinSetting("temperature_pla", 185, 0, 400, _("Extruder temperature for PLA"), _("Extruder temp for PLA (deg C)"), "Printer"))
         self._add(SpinSetting("xy_feedrate", 3000, 0, 50000, _("X && Y manual feedrate"), _("Feedrate for Control Panel Moves in X and Y (mm/min)"), "Printer"))
         self._add(SpinSetting("z_feedrate", 200, 0, 50000, _("Z manual feedrate"), _("Feedrate for Control Panel Moves in Z (mm/min)"), "Printer"))
@@ -358,7 +358,7 @@ class pronsole(cmd.Cmd):
         self.sdfiles = []
         self.paused = False
         self.sdprinting = 0
-        self.temps = {"pla":"185", "abs":"230", "off":"0"}
+        self.temps = {"pla":"185", "abs":"200", "off":"0"}
         self.bedtemps = {"pla":"60", "abs":"110", "off":"0"}
         self.percentdone = 0
         self.tempreadings = ""
