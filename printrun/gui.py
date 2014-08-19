@@ -144,7 +144,10 @@ class KeyboardSizer(wx.GridBagSizer):
         self.N9btn = self.make_button("9")
         self.Add(self.N9btn, pos=(3,9))
         self.Minusbtn = self.make_button("-")
-        self.Add(self.Minusbtn, pos=(3,10))
+        self.Add(self.Minusbtn, pos=(2,10))
+#        self.Atbtn = self.make_button("@")
+#        self.Add(self.Atbtn, pos=(2,10))
+
 
     def make_button(self, label):
         button = wx.Button(self.parentpanel, -1, label, style=0, size = (50,50))
@@ -454,7 +457,7 @@ class LogPane(wx.BoxSizer):
         root.commandbox.histindex = 1
         #root.printerControls.append(root.commandbox)
         lbrs.Add(root.commandbox, 1)
-        root.sendbtn = make_button(parentpanel, _("Send"), root.sendline, _("Send Command to Printer"), style = wx.BU_EXACTFIT, container = lbrs)
+        root.sendbtn = make_button(parentpanel, _("Send"), root.sendline, _("Send Command to Printer"), size = [70,60], style = wx.BU_EXACTFIT, container = lbrs)
         #root.printerControls.append(root.sendbtn)
         self.Add(lbrs, 0, wx.EXPAND)
 
@@ -505,8 +508,8 @@ def MainToolbar(root, parentpanel = None, use_wrapsizer = False):
 
     root.resetbtn = make_autosize_button(parentpanel, _("Reset"), root.reset, _("Reset the printer"), self)
     root.loadbtn = make_autosize_button(parentpanel, _("Load file"), root.loadfile, _("Load a 3D model file"), self)
-    # root.sdbtn = make_autosize_button(parentpanel, _("SD"), root.sdmenu, _("SD Card Printing"), self)
-    # root.printerControls.append(root.sdbtn)
+    root.sdbtn = make_autosize_button(parentpanel, _("SD"), root.sdmenu, _("SD Card Printing"), self)
+    root.printerControls.append(root.sdbtn)
     root.printbtn = make_sized_button(parentpanel, _("Print"), root.printfile, _("Start Printing Loaded File"), self)
     root.printbtn.Disable()
     root.pausebtn = make_sized_button(parentpanel, _("Pause"), root.pause, _("Pause Current Print"), self)

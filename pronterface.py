@@ -1246,7 +1246,10 @@ class PronterWindow(MainWindow, pronsole.pronsole):
             return
         wx.CallAfter(self.addtexttolog, ">>>" + command + "\n");
         self.parseusercmd(str(command))
-        self.onecmd(str(command))
+	if str(command).startswith('@'):
+            self.onecmd(str(command).lower())
+        else:
+            self.onecmd(str(command))
         self.commandbox.SetSelection(0, len(command))
         self.commandbox.history.append(command)
         self.commandbox.histindex = len(self.commandbox.history)
